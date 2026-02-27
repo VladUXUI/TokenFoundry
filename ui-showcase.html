@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variables to LLM – UI Showcase</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    :root, [data-theme="light"] {
+      --color-brand-primary-100: #FF004D;
+      --color-brand-primary-60: #FA5470;
+      --color-brand-primary-50: #CC003D;
+      --color-brand-primary-35: rgba(255,0,77,0.35);
+      --color-brand-primary-10: #FFEBF0;
+      --color-brand-primary-8: rgba(255,0,77,0.08);
+      --color-black-90: rgba(0,0,0,0.90);
+      --color-black-85: rgba(0,0,0,0.85);
+      --color-black-80: rgba(0,0,0,0.80);
+      --color-black-60: rgba(0,0,0,0.60);
+      --color-black-50: rgba(0,0,0,0.50);
+      --color-black-40: rgba(0,0,0,0.40);
+      --color-black-25: rgba(0,0,0,0.25);
+      --color-black-20: rgba(0,0,0,0.20);
+      --color-black-12: rgba(0,0,0,0.12);
+      --color-black-10: rgba(0,0,0,0.10);
+      --color-black-8: rgba(0,0,0,0.08);
+      --color-black-5: rgba(0,0,0,0.05);
+      --color-black-30: rgba(0,0,0,0.30);
+      --color-white-100: #FFFFFF;
+      --color-white-55: rgba(255,255,255,0.55);
+      --color-grey-100: #F2F2F2;
+      --color-error-100: #FF004D;
+      --color-error-10: #FFEBF0;
+      --color-success-100: #00C566;
+      --color-success-10: #E5FCF2;
+      --bg-surface: var(--color-white-100);
+      --bg-surface-alt: var(--color-black-5);
+      --text-primary: var(--color-black-90);
+      --text-secondary: var(--color-black-60);
+      --text-tertiary: var(--color-black-40);
+      --text-disabled: var(--color-black-25);
+      --border-default: var(--color-black-12);
+      --border-strong: var(--color-black-25);
+      --space-2: 4px; --space-3: 8px; --space-4: 12px;
+      --space-5: 16px; --space-6: 20px; --space-7: 24px;
+      --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px;
+      --radius-full: 9999px;
+      --font-family: 'Inter', system-ui, sans-serif;
+      --text-xs: 11px; --text-sm: 13px; --text-base: 14px; --text-md: 16px;
+      --btn-primary-bg: var(--color-brand-primary-100);
+      --btn-primary-fg: var(--color-white-100);
+      --btn-primary-hover: var(--color-brand-primary-60);
+      --btn-primary-dis-bg: var(--color-black-20);
+      --btn-primary-dis-fg: var(--color-white-55);
+      --btn-sec-border: var(--color-brand-primary-100);
+      --btn-sec-fg: var(--color-brand-primary-100);
+      --btn-sec-hover-bg: var(--color-brand-primary-8);
+      --btn-sec-dis-border: var(--color-black-20);
+      --btn-sec-dis-fg: var(--color-black-30);
+      --checkbox-bg: var(--color-white-100);
+      --checkbox-bg-checked: var(--color-brand-primary-100);
+      --checkbox-border: var(--color-black-25);
+      --checkbox-border-checked: var(--color-brand-primary-100);
+      --checkbox-border-disabled: var(--color-black-12);
+      --checkbox-bg-disabled: var(--color-black-5);
+      --checkbox-check: var(--color-white-100);
+      --checkbox-text: var(--color-black-90);
+      --checkbox-text-disabled: var(--color-black-25);
+      --radio-bg: var(--color-white-100);
+      --radio-bg-checked: var(--color-brand-primary-100);
+      --radio-border: var(--color-black-25);
+      --radio-border-checked: var(--color-brand-primary-100);
+      --radio-dot: var(--color-white-100);
+      --radio-text: var(--color-black-90);
+      --radio-text-disabled: var(--color-black-25);
+      --tab-text: var(--color-black-60);
+      --tab-text-active: var(--color-black-90);
+      --tab-text-disabled: var(--color-black-25);
+      --tab-border: var(--color-black-12);
+      --tab-indicator: var(--color-brand-primary-100);
+      --tab-indicator-height: 2px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      background: #E8E8E8;
+      color: var(--text-primary);
+      font-size: var(--text-base);
+      padding: 40px;
+    }
+
+    h1 { font-size: 22px; font-weight: 700; color: #000; margin-bottom: 8px; }
+    .subtitle { font-size: 13px; color: rgba(0,0,0,0.5); margin-bottom: 40px; }
+
+    .showcase-row { display: flex; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; align-items: flex-start; }
+
+    .frame {
+      background: #fff; border-radius: 12px; padding: 24px;
+      min-width: 280px; flex: 1;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .frame-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(0,0,0,0.35);
+      margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* Plugin frame wrapper */
+    .plugin-frame {
+      background: #fff; border-radius: 12px; padding: 16px;
+      width: 300px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .section { margin-bottom: 24px; }
+    .section-title {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+      text-transform: uppercase; color: var(--text-tertiary);
+      margin-bottom: 12px; padding-bottom: 4px; border-bottom: 1px solid var(--border-default);
+    }
+
+    /* Token chart */
+    .token-chart {
+      width: 100%; background: var(--bg-surface-alt);
+      border-radius: var(--radius-md); border: 1px solid var(--border-default);
+      padding: var(--space-5); margin-bottom: var(--space-7);
+      display: flex; align-items: flex-end; gap: var(--space-5);
+      min-height: 140px; position: relative;
+    }
+    .token-chart-col { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); flex: 1; }
+    .token-chart-label { font-size: var(--text-xs); color: var(--text-secondary); }
+    .token-chart-count { font-size: var(--text-md); font-weight: 700; color: var(--text-primary); line-height: 1; }
+    .token-chart-bar { width: 100%; border-radius: var(--radius-sm); background: var(--color-black-85); min-height: 8px; }
+    .token-chart-col:nth-child(3) .token-chart-bar { background: var(--color-black-50); }
+    .token-chart-col:nth-child(4) .token-chart-bar { background: var(--color-black-25); }
+
+    /* Refresh button */
+    .btn-icon {
+      position: absolute; top: var(--space-4); right: var(--space-4);
+      width: 28px; height: 28px; border-radius: var(--radius-xs);
+      border: 1px solid var(--border-default); background: var(--bg-surface);
+      color: var(--text-secondary); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; padding: 0;
+    }
+    .btn-icon svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 12px 20px; border-radius: var(--radius-full);
+      border: 2px solid transparent; font-family: inherit; font-size: var(--text-base);
+      font-weight: 500; white-space: nowrap; cursor: pointer; outline: none;
+    }
+    .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); }
+    .btn-primary.hover { background: var(--btn-primary-hover); }
+    .btn-primary.disabled { background: var(--btn-primary-dis-bg); color: var(--btn-primary-dis-fg); cursor: not-allowed; }
+    .btn-secondary { background: transparent; border-color: var(--btn-sec-border); color: var(--btn-sec-fg); }
+    .btn-secondary.hover { background: var(--btn-sec-hover-bg); }
+    .btn-secondary.disabled { border-color: var(--btn-sec-dis-border); color: var(--btn-sec-dis-fg); cursor: not-allowed; }
+    .button-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-row { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+    .state-label { font-size: 11px; color: rgba(0,0,0,0.4); width: 56px; flex-shrink: 0; }
+    .prompt-label { font-size: var(--text-xs); color: var(--text-secondary); margin-bottom: 8px; font-weight: 500; }
+
+    /* Checkboxes */
+    .checkbox-group { display: flex; flex-direction: row; gap: 8px; width: 100%; }
+    .checkbox-container { flex: 1; display: flex; align-items: center; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-default); background: var(--bg-surface-alt); }
+    .checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; width: 100%; }
+    .checkbox-button { position: relative; width: 20px; height: 20px; border-radius: var(--radius-xs); border: 2px solid var(--checkbox-border); background: var(--checkbox-bg); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .checkbox-button.checked { background: var(--checkbox-bg-checked); border-color: var(--checkbox-border-checked); }
+    .checkbox-button.checked::after { content: ''; width: 5px; height: 9px; border: 2px solid var(--checkbox-check); border-top: none; border-left: none; transform: rotate(45deg) translate(-1px,-1px); }
+    .checkbox-button.disabled { background: var(--checkbox-bg-disabled); border-color: var(--checkbox-border-disabled); }
+    .checkbox-label { font-size: var(--text-sm); font-weight: 500; color: var(--checkbox-text); }
+    .checkbox-label.disabled { color: var(--checkbox-text-disabled); }
+    .stack { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Radios */
+    .radio { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+    .radio-button { position: relative; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--radio-border); background: var(--radio-bg); flex-shrink: 0; }
+    .radio-button.checked { background: var(--radio-bg-checked); border-color: var(--radio-border-checked); }
+    .radio-button.checked::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--radio-dot); }
+    .radio-label { font-size: var(--text-sm); font-weight: 500; color: var(--radio-text); }
+    .radio-label.disabled { color: var(--radio-text-disabled); }
+
+    /* Accordion */
+    .accordion { display: flex; flex-direction: column; border: 1px solid var(--border-default); border-radius: var(--radius-sm); overflow: hidden; }
+    .accordion-item { border-bottom: 1px solid var(--border-default); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--bg-surface); cursor: pointer; user-select: none; gap: 8px; }
+    .accordion-header-left { display: flex; align-items: center; gap: 8px; }
+    .accordion-title { font-size: var(--text-sm); font-weight: 500; color: var(--text-primary); }
+    .accordion-badge { font-size: var(--text-xs); color: var(--text-secondary); background: var(--bg-surface-alt); border: 1px solid var(--border-default); border-radius: var(--radius-full); padding: 1px 8px; }
+    .accordion-chevron { color: var(--text-tertiary); width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; }
+    .accordion-chevron.open { transform: rotate(180deg); }
+    .accordion-panel { overflow: hidden; }
+    .accordion-panel-inner { padding: 8px 12px 12px; background: var(--bg-surface); }
+
+    /* Token grid */
+    .token-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .token-color-with-label { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-default); background: var(--bg-surface-alt); font-size: var(--text-xs); }
+    .token-color-swatch { width: 20px; height: 20px; border-radius: var(--radius-xs); border: 1px solid var(--border-default); flex-shrink: 0; }
+    .token-spacing, .token-radius { display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-default); background: var(--bg-surface-alt); font-size: var(--text-xs); }
+
+    /* Validation warning */
+    .validation-warning { color: var(--color-error-100); font-size: var(--text-xs); padding: 8px; background: var(--color-error-10); border-radius: var(--radius-sm); border: 1px solid rgba(255,0,77,0.2); }
+
+    /* Toast */
+    .toast { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; max-width: 300px; }
+    .toast.success { border-color: var(--color-success-100); background: var(--color-success-10); }
+    .toast.error { border-color: var(--color-error-100); background: var(--color-error-10); }
+    .toast-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .toast-icon svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .toast.success .toast-icon { color: var(--color-success-100); }
+    .toast.error .toast-icon { color: var(--color-error-100); }
+  </style>
+</head>
+<body>
+
+  <h1>Variables to LLM – UI Showcase</h1>
+  <p class="subtitle">All UI states for design review</p>
+
+  <!-- ROW 1: Full plugin states -->
+  <div class="showcase-row">
+
+    <!-- Default state with chart -->
+    <div class="plugin-frame">
+      <div class="frame-label">Plugin – Default State</div>
+      <div class="token-chart">
+        <button class="btn-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Colours</span>
+          <span class="token-chart-count">–</span>
+          <div class="token-chart-bar" style="height:8px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Spacing</span>
+          <span class="token-chart-count">–</span>
+          <div class="token-chart-bar" style="height:8px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Radius</span>
+          <span class="token-chart-count">–</span>
+          <div class="token-chart-bar" style="height:8px;"></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Targets</div>
+        <div class="checkbox-group">
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">Web</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">iOS</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">Android</span></label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart with data -->
+    <div class="plugin-frame">
+      <div class="frame-label">Plugin – With Token Data</div>
+      <div class="token-chart">
+        <button class="btn-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Colours</span>
+          <span class="token-chart-count">24</span>
+          <div class="token-chart-bar" style="height:90px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Spacing</span>
+          <span class="token-chart-count">8</span>
+          <div class="token-chart-bar" style="height:30px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Radius</span>
+          <span class="token-chart-count">5</span>
+          <div class="token-chart-bar" style="height:19px;"></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Targets</div>
+        <div class="checkbox-group">
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">Web</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">iOS</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">Android</span></label></div>
+        </div>
+      </div>
+      <div class="prompt-label" style="margin-top:16px;">Cursor Prompt (based on targets: Web + iOS + Android)</div>
+      <div class="button-group">
+        <button class="btn btn-primary">Copy Prompt</button>
+        <button class="btn btn-secondary">Download JSON</button>
+      </div>
+    </div>
+
+    <!-- Validation error state -->
+    <div class="plugin-frame">
+      <div class="frame-label">Plugin – Validation Error</div>
+      <div class="token-chart">
+        <button class="btn-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Colours</span>
+          <span class="token-chart-count">24</span>
+          <div class="token-chart-bar" style="height:90px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Spacing</span>
+          <span class="token-chart-count">8</span>
+          <div class="token-chart-bar" style="height:30px;"></div>
+        </div>
+        <div class="token-chart-col">
+          <span class="token-chart-label">Radius</span>
+          <span class="token-chart-count">5</span>
+          <div class="token-chart-bar" style="height:19px;"></div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Targets</div>
+        <div class="checkbox-group">
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">Web</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">iOS</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">Android</span></label></div>
+        </div>
+      </div>
+      <div class="validation-warning" style="margin-top:8px;">Select at least one target (Web, iOS, or Android).</div>
+    </div>
+
+  </div>
+
+  <!-- ROW 2: Accordion (expanded states) -->
+  <div class="showcase-row">
+
+    <!-- Accordion all collapsed -->
+    <div class="frame" style="min-width:280px; max-width:320px;">
+      <div class="frame-label">Accordion – Collapsed</div>
+      <div class="section-title" style="margin-bottom:12px;">Variables to export</div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Colours</span><span class="accordion-badge">24</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Spacing</span><span class="accordion-badge">8</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Radius</span><span class="accordion-badge">5</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion colours expanded -->
+    <div class="frame" style="min-width:280px; max-width:340px;">
+      <div class="frame-label">Accordion – Colours Expanded</div>
+      <div class="section-title" style="margin-bottom:12px;">Variables to export</div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Colours</span><span class="accordion-badge">6</span></div>
+            <svg class="accordion-chevron open" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-panel">
+            <div class="accordion-panel-inner">
+              <div class="token-grid">
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#FF004D;"></div><span>primary-100</span></div>
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#FA5470;"></div><span>primary-60</span></div>
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#CC003D;"></div><span>primary-50</span></div>
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#00C566;"></div><span>success</span></div>
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#000;"></div><span>black</span></div>
+                <div class="token-color-with-label"><div class="token-color-swatch" style="background:#fff; border:1px solid #ddd;"></div><span>white</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Spacing</span><span class="accordion-badge">8</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Radius</span><span class="accordion-badge">5</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordion spacing expanded -->
+    <div class="frame" style="min-width:280px; max-width:340px;">
+      <div class="frame-label">Accordion – Spacing Expanded</div>
+      <div class="section-title" style="margin-bottom:12px;">Variables to export</div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Colours</span><span class="accordion-badge">6</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Spacing</span><span class="accordion-badge">8</span></div>
+            <svg class="accordion-chevron open" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-panel">
+            <div class="accordion-panel-inner">
+              <div class="token-grid">
+                <div class="token-spacing">0: 0</div>
+                <div class="token-spacing">1: 2</div>
+                <div class="token-spacing">2: 4</div>
+                <div class="token-spacing">3: 8</div>
+                <div class="token-spacing">4: 12</div>
+                <div class="token-spacing">5: 16</div>
+                <div class="token-spacing">6: 20</div>
+                <div class="token-spacing">7: 24</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div class="accordion-header-left"><span class="accordion-title">Radius</span><span class="accordion-badge">5</span></div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 3: Component states -->
+  <div class="showcase-row">
+
+    <!-- Buttons -->
+    <div class="frame">
+      <div class="frame-label">Buttons</div>
+      <div class="btn-row"><span class="state-label">Default</span><button class="btn btn-primary">Copy Prompt</button><button class="btn btn-secondary">Download JSON</button></div>
+      <div class="btn-row"><span class="state-label">Hover</span><button class="btn btn-primary hover">Copy Prompt</button><button class="btn btn-secondary hover">Download JSON</button></div>
+      <div class="btn-row"><span class="state-label">Disabled</span><button class="btn btn-primary disabled" disabled>Copy Prompt</button><button class="btn btn-secondary disabled" disabled>Download JSON</button></div>
+    </div>
+
+    <!-- Checkboxes -->
+    <div class="frame">
+      <div class="frame-label">Checkboxes</div>
+      <div class="stack">
+        <label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">Unchecked</span></label>
+        <label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">Checked</span></label>
+        <label class="checkbox"><span class="checkbox-button disabled"></span><span class="checkbox-label disabled">Disabled</span></label>
+      </div>
+      <div style="margin-top:16px;">
+        <div style="font-size:11px; color:rgba(0,0,0,0.4); margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em;">In containers</div>
+        <div class="checkbox-group">
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button checked"></span><span class="checkbox-label">Web</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">iOS</span></label></div>
+          <div class="checkbox-container"><label class="checkbox"><span class="checkbox-button"></span><span class="checkbox-label">Android</span></label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radios -->
+    <div class="frame">
+      <div class="frame-label">Radio Buttons</div>
+      <div class="stack">
+        <label class="radio"><span class="radio-button"></span><span class="radio-label">Unchecked</span></label>
+        <label class="radio"><span class="radio-button checked"></span><span class="radio-label">Selected</span></label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 4: Toasts -->
+  <div class="showcase-row">
+    <div class="frame">
+      <div class="frame-label">Toast Notifications</div>
+      <div class="stack">
+        <div class="toast success"><div class="toast-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div>Prompt copied to clipboard.</div></div>
+        <div class="toast success"><div class="toast-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div>JSON file downloaded.</div></div>
+        <div class="toast error"><div class="toast-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div><div>No export data. Click Export / Generate first.</div></div>
+        <div class="toast error"><div class="toast-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div><div>Copy failed. Please try again.</div></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
