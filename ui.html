@@ -1536,9 +1536,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: var(--space-5);
       height: 48px;
       width: 200px;
-      padding: 0 var(--space-6);
+      padding: 0 var(--space-4);
       border-radius: var(--radius-full);
       border: 1px solid rgba(255,255,255,0.3);
       background: transparent;
@@ -1759,11 +1760,18 @@
           <button id="copyPromptStep1" class="btn-pill-primary">Copy prompt</button>
         </div>
 
-        <div class="step-card" id="step2Card" style="display:none;">
-          <p class="step-card-label">STEP 2</p>
-          <p class="step-card-title">Design system page</p>
-          <p class="step-card-desc">Generate prompt so AI can build the living design system route (app/design-system). Tokens stay in sync with globals.css.</p>
-          <button id="copyPromptStep2" class="btn-pill-secondary">Copy prompt</button>
+        <div class="step-card" id="step2Card">
+          <p class="step-card-label">STEP 2 (optional)</p>
+          <p class="step-card-title">Get DS Preview</p>
+          <p class="step-card-desc">Download a local design system preview you can run on your computer.</p>
+          <button id="openDsPreview" class="btn-pill-secondary">
+            <span>Open preview repo</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;">
+              <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="m21 3-9 9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M15 3h6v6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
         </div>
 
         <hr class="generate-divider" />
@@ -1836,7 +1844,6 @@
   <script>
     var exportJson = null;
     var tokensPrompt = "";
-    var designSystemPrompt = "";
     var currentSettings = null;
     var autoDetectApplied = false;
 
@@ -2562,13 +2569,8 @@
         var p = msg.payload;
         exportJson = p.exportJson || p;
         tokensPrompt = p.tokensPrompt || "";
-        designSystemPrompt = p.designSystemPrompt || "";
         currentSettings = p.settings || getSettings();
         updateSummary();
-        var step2Card = document.getElementById("step2Card");
-        if (step2Card) {
-          step2Card.style.display = designSystemPrompt ? "" : "none";
-        }
         // ── Auto-detect target platforms on first load only ──
         if (!autoDetectApplied && p.detectedPlatforms) {
           autoDetectApplied = true;
@@ -2592,10 +2594,8 @@
 
       // Disable copy buttons + show/hide Generate tab hint
       var btn1 = document.getElementById("copyPromptStep1");
-      var btn2 = document.getElementById("copyPromptStep2");
       var hint = document.getElementById("noTargetHint");
       if (btn1) btn1.disabled = noTarget;
-      if (btn2) btn2.disabled = noTarget;
       if (hint) hint.style.display = noTarget ? "block" : "none";
 
       if (noTarget) return;
@@ -2714,20 +2714,6 @@
       });
     };
 
-    document.getElementById("copyPromptStep2").onclick = function () {
-      if (!designSystemPrompt) {
-        showToast("Refresh to load tokens first.", "error");
-        return;
-      }
-      copyToClipboard(designSystemPrompt).then(function (ok) {
-        if (ok) {
-          showToast("Step 2 prompt copied to clipboard.", "success");
-        } else {
-          showToast("Copy failed. Please try again.", "error");
-        }
-      });
-    };
-
     document.getElementById("downloadJson").onclick = function () {
       if (!exportJson) { 
         showToast("Refresh to load tokens first.", "error");
@@ -2818,9 +2804,6 @@
         ]
       };
       tokensPrompt = "mock";
-      designSystemPrompt = "mock";
-      var step2Card = document.getElementById("step2Card");
-      if (step2Card) { step2Card.style.display = ""; }
       // Populate UI
       updateSummary();
       updateTokenPreview();
