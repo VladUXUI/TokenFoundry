@@ -200,6 +200,25 @@
       --tab-border: var(--color-black-12);
       --tab-indicator: var(--color-brand-primary-100);
       --tab-indicator-height: 2px;
+
+      /* Generate tab (step cards) — light */
+      --step-card-bg: var(--bg-surface-alt);
+      --step-card-title-color: var(--text-primary);
+      --step-card-desc-color: var(--text-secondary);
+      --step-divider-color: var(--border-default);
+      --step-download-text-color: var(--text-secondary);
+      --step-ghost-border: var(--border-default);
+      --step-ghost-color: var(--text-secondary);
+      --step-ghost-hover-bg: var(--bg-surface-alt);
+      --step-ghost-hover-border: var(--border-strong);
+      --step-ghost-hover-color: var(--text-primary);
+      --step-pill-sec-border: var(--border-strong);
+      --step-pill-sec-color: var(--text-secondary);
+      --step-pill-sec-hover-bg: var(--bg-surface-alt);
+      --step-pill-sec-hover-border: var(--border-strong);
+      --step-pill-sec-hover-color: var(--text-primary);
+      --step-pill-sec-focus-ring: var(--color-brand-primary-45);
+      --step-hint-link-color: var(--text-secondary);
     }
 
     [data-theme="dark"] {
@@ -245,6 +264,25 @@
       --tab-text-active: var(--color-white-90);
       --tab-text-disabled: var(--color-white-20);
       --tab-border: var(--color-white-10);
+
+      /* Generate tab (step cards) — dark */
+      --step-card-bg: #2a2a2a;
+      --step-card-title-color: rgba(255,255,255,0.9);
+      --step-card-desc-color: rgba(255,255,255,0.5);
+      --step-divider-color: rgba(255,255,255,0.1);
+      --step-download-text-color: rgba(255,255,255,0.5);
+      --step-ghost-border: rgba(255,255,255,0.2);
+      --step-ghost-color: rgba(255,255,255,0.55);
+      --step-ghost-hover-bg: rgba(255,255,255,0.08);
+      --step-ghost-hover-border: rgba(255,255,255,0.35);
+      --step-ghost-hover-color: rgba(255,255,255,0.8);
+      --step-pill-sec-border: rgba(255,255,255,0.3);
+      --step-pill-sec-color: rgba(255,255,255,0.7);
+      --step-pill-sec-hover-bg: rgba(255,255,255,0.05);
+      --step-pill-sec-hover-border: rgba(255,255,255,0.55);
+      --step-pill-sec-hover-color: rgba(255,255,255,0.9);
+      --step-pill-sec-focus-ring: rgba(255,255,255,0.2);
+      --step-hint-link-color: rgba(255,255,255,0.7);
     }
 
     /* ════════════════════════════════════════════════════════════
@@ -1469,7 +1507,7 @@
     }
 
     .step-card {
-      background: #2a2a2a;
+      background: var(--step-card-bg);
       border-radius: var(--radius-md);
       padding: var(--space-7);
       display: flex;
@@ -1489,13 +1527,13 @@
     .step-card-title {
       font-size: var(--text-md);
       font-weight: 500;
-      color: rgba(255,255,255,0.9);
+      color: var(--step-card-title-color);
       margin: 0;
     }
 
     .step-card-desc {
       font-size: var(--text-base);
-      color: rgba(255,255,255,0.5);
+      color: var(--step-card-desc-color);
       line-height: 1.5;
       margin: 0;
     }
@@ -1541,9 +1579,9 @@
       width: 200px;
       padding: 0 var(--space-4);
       border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid var(--step-pill-sec-border);
       background: transparent;
-      color: rgba(255,255,255,0.7);
+      color: var(--step-pill-sec-color);
       font-family: inherit;
       font-size: var(--text-base);
       font-weight: 500;
@@ -1554,22 +1592,22 @@
     }
 
     .btn-pill-secondary:hover:not(:disabled) {
-      border-color: rgba(255,255,255,0.55);
-      color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.05);
+      border-color: var(--step-pill-sec-hover-border);
+      color: var(--step-pill-sec-hover-color);
+      background: var(--step-pill-sec-hover-bg);
     }
 
     .btn-pill-secondary:active:not(:disabled) {
-      background: rgba(255,255,255,0.1);
+      background: var(--step-pill-sec-hover-bg);
     }
 
     .btn-pill-secondary:focus-visible {
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+      box-shadow: 0 0 0 3px var(--step-pill-sec-focus-ring);
     }
 
     .generate-divider {
       height: 1px;
-      background: rgba(255,255,255,0.1);
+      background: var(--step-divider-color);
       border: none;
       margin: var(--space-3) 0;
     }
@@ -1584,7 +1622,7 @@
     .download-row-text {
       flex: 1;
       font-size: 12px;
-      color: rgba(255,255,255,0.5);
+      color: var(--step-download-text-color);
       line-height: 1.5;
       margin: 0;
     }
@@ -1595,9 +1633,9 @@
       gap: var(--space-3);
       padding: var(--space-4);
       border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid var(--step-ghost-border);
       background: transparent;
-      color: rgba(255,255,255,0.55);
+      color: var(--step-ghost-color);
       font-family: inherit;
       font-size: 12px;
       font-weight: 500;
@@ -1609,13 +1647,13 @@
     }
 
     .btn-ghost-download:hover:not(:disabled) {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.35);
-      color: rgba(255,255,255,0.8);
+      background: var(--step-ghost-hover-bg);
+      border-color: var(--step-ghost-hover-border);
+      color: var(--step-ghost-hover-color);
     }
 
     .btn-ghost-download:active:not(:disabled) {
-      background: rgba(255,255,255,0.12);
+      background: var(--step-ghost-hover-bg);
     }
 
     .btn-ghost-download:focus-visible {
@@ -1671,14 +1709,14 @@
       padding: 0;
       font: inherit;
       font-size: var(--text-xs);
-      color: rgba(255,255,255,0.7);
+      color: var(--step-hint-link-color);
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
 
     .no-target-hint .hint-settings-link:hover {
-      color: rgba(255,255,255,0.95);
+      color: var(--step-pill-sec-hover-color);
     }
 
     .btn-pill-primary:disabled,
