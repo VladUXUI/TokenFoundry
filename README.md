@@ -26,17 +26,31 @@ It’s not trying to replace your design system stack. It’s not competing with
 ## ✨ What It Does
 
 - Reads your Figma variables (colors, spacing, typography, etc.)
-- Structures them into a clean, usable format
+- Structures them into a clean, usable format (React + Tailwind or ReactNative)
 - Let's you know of any issues with tokens
 - Generates a prompt you can copy
 - Optionally lets you preview your tokens in a separate UI
 
 --
 
-## ✨ What Does The Prompt Do
+## ✨ What The Prompt Does
 
 - Generates all the necessary files to start building
 - Created a component-rules.md doc, this ensures that when you create components, ai will use the token variables
+
+.
+├── app
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── src
+│   └── data
+│       └── design-tokens.ts
+└── styles
+    ├── tokens.ts
+    ├── component-rules.md
+    └── tailwind.config.ts
+
 
 ---
 
