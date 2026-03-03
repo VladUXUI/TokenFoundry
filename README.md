@@ -21,7 +21,9 @@ That’s it.
 
 It’s not trying to replace your design system stack. It’s not competing with enterprise token platforms. It’s just an experiment in making Figma variables easier to use in AI-driven workflows.
 
+
 ---
+
 
 ## ✨ What It Does
 
@@ -31,14 +33,17 @@ It’s not trying to replace your design system stack. It’s not competing with
 - Generates a prompt you can copy
 - Optionally lets you preview your tokens in a separate UI
 
---
+
+---
+
 
 ## ✨ What The Prompt Does
 
 - Generates all the necessary files to start building
 - Created a component-rules.md doc, this ensures that when you create components, ai will use the token variables
 
-.
+<pre>
+ .
 ├── app
 │   ├── globals.css
 │   ├── layout.tsx
@@ -51,8 +56,11 @@ It’s not trying to replace your design system stack. It’s not competing with
     ├── component-rules.md
     └── tailwind.config.ts
 
+</pre> 
+
 
 ---
+
 
 ## 🚀 How It Works
 
@@ -72,7 +80,9 @@ Use the TokenFoundry Preview page to visually inspect your exported tokens.
 Preview repository:  
 👉 https://github.com/VladUXUI/TokenFoundry-Preview
 
+
 ---
+
 
 ## 🧠 Why I Built It
 
@@ -85,7 +95,9 @@ Most tools also just copy just tokens you used in the selected screen.
 
 This project explores the bridge between design systems and AI-generated interfaces.
 
+
 ---
+
 
 ## ❌ What This Is Not
 
@@ -95,7 +107,9 @@ This project explores the bridge between design systems and AI-generated interfa
 
 It’s a playground project.
 
+
 ---
+
 
 ## 🛠 Example Use Case
 
@@ -106,7 +120,9 @@ It’s a playground project.
 
 No magic. Just structured input.
 
+
 ---
+
 
 ## 📌 Status
 
