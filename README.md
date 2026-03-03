@@ -1,40 +1,95 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+# TokenFoundry
 
-  https://www.figma.com/plugin-docs/plugin-quickstart-guide/
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+I built a thing.
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+TokenFoundry is a small Figma plugin that reads your design tokens and turns them into a structured prompt you can paste into AI tools.
 
-  https://nodejs.org/en/download/
+That’s it.
 
-Next, install TypeScript using the command:
+It’s not trying to replace your design system stack. It’s not competing with enterprise token platforms. It’s just an experiment in making Figma variables easier to use in AI-driven workflows.
 
-  npm install -g typescript
+---
 
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
+## ✨ What It Does
 
-  npm install --save-dev @figma/plugin-typings
+- Reads your Figma variables (colors, spacing, typography, etc.)
+- Structures them into a clean, usable format
+- Let's you know of any issues with tokens
+- Generates a prompt you can copy
+- Optionally lets you preview your tokens in a separate UI
 
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+--
 
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+## ✨ What Does The Prompt Do
 
-For more information, visit https://www.typescriptlang.org/
+- Generates all the necessary files to start building
+- Created a component-rules.md doc, this ensures that when you create components, ai will use the token variables
 
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
+---
 
-We recommend writing TypeScript code using Visual Studio code:
+## 🚀 How It Works
 
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "npm: watch". You will have to do this again every time
-    you reopen Visual Studio Code.
+1. Download the repository
+2. Install the plugin (plugin>development>instal plugin from manifest>select manifest file)
+3. Open a Figma file
+4. Run **TokenFoundry**
+5. Copy the generated prompt
+6. Create a new empty folder on your computer
+7. Open that folder with your Ai tool (only tested with Claude & Cursor)
+5. Paste the prompt from the plug-in, and wait for about 5 min.
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+Optional:
+
+Use the TokenFoundry Preview page to visually inspect your exported tokens.
+
+Preview repository:  
+👉 https://github.com/VladUXUI/TokenFoundry-Preview
+
+---
+
+## 🧠 Why I Built It
+
+Design tokens are structured data.  
+AI tools love structured data.
+
+Most tools also just copy just tokens you used in the selected screen.
+
+**Export → Copy → Paste → Generate UI**
+
+This project explores the bridge between design systems and AI-generated interfaces.
+
+---
+
+## ❌ What This Is Not
+
+- Not a full design system manager  
+- Not a production-ready sync engine  
+- Not trying to replace any awesome MCP Consoles that exist.
+
+It’s a playground project.
+
+---
+
+## 🛠 Example Use Case
+
+- Define variables in Figma  
+- Export them with TokenFoundry  
+- Paste the prompt into Cursor / ChatGPT / Claude  
+- Start generatig components that use those tokens
+
+No magic. Just structured input.
+
+---
+
+## 📌 Status
+
+- Experimental  
+- Built for learning  
+- Actively tinkered with  
+
+---
+
+If you’re exploring AI-assisted UI generation and want a lightweight way to move tokens out of Figma, this might be useful.
+
+If you’re looking for enterprise-grade token governance, this is not that.
