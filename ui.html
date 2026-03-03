@@ -2714,6 +2714,14 @@
       });
     };
 
+    document.getElementById("openDsPreview").onclick = function () {
+      try {
+        window.open("https://github.com/VladUXUI/TokenFoundry-Preview", "_blank");
+      } catch (e) {
+        // no-op: best-effort open
+      }
+    };
+
     document.getElementById("downloadJson").onclick = function () {
       if (!exportJson) { 
         showToast("Refresh to load tokens first.", "error");
